@@ -1,5 +1,5 @@
 # SARS-Cov-2-Spikeinfo
-Calculate binding and expression scores of RBD and RBM 
+Calculate the binding and expression scores of RBD and RBM to ACE2
 
 -----------
 A surface spike protein regulates the entry of SARS-Cov-2 into host cells.
