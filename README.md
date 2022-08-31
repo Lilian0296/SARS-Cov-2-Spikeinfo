@@ -27,6 +27,20 @@ python RBD_RBM_matrix -i ./input_folder/ -o ./output_path/ -d ./data_matrix_fold
 
 ```
 
+### Output
+#### Output a summary csv file containing following information:
+1. File name
+2. S_sequences
+3. RBD and RBM sequences
+4. The position of RBD start and end 
+5. The position of RBM start and end 
+6. The length of RBD and RBM
+7. The binding score of RBD and RBM to ACE2 
+  (RBD_score_sum, RBD_score (for each amino acid position);
+   RBM_score_sum, RBM_score (for each amino acid position))
+8. The expression score of RBD and RBM
+  (RBD_ex_sum, RBD_ex_score (for each amino acid position);
+   RBM_ex_sum, RBM_ex_score (for each amino acid position))
 
 
 ### References
