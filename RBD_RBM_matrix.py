@@ -69,37 +69,42 @@ def RBD_RBM_matrix(Input_folder, Output_path, Data_matrix_folder):
     df.reset_index(inplace=True)
     # map dict
     for i in range(len(df)):
-        rbd_seq=list(df["RBD_seq"][i])
-        rbm_seq=list(df["RBM_seq"][i])
-        rbd_map=list([*map(col.get, rbd_seq)])
-        rbm_map=list([*map(col.get, rbm_seq)])
-        # build binding score
-        rbd_score=[]
-        rbm_score=[]
-        # build expression score
-        rbdx_score=[]
-        rbmx_score=[]
-        # map scores
-        for j in range(len(rbd_map)):
-            bind_rbd=wuhan_m[j,rbd_map[j]]
-            rbd_score.append(bind_rbd)
-            ex_rbd=wuhan_expm[j,rbd_map[j]]
-            rbdx_score.append(ex_rbd)
-        rbd_sum=sum(rbd_score)
-        rbdx_sum=sum(rbdx_score)
-        df["RBD_score_sum"][i], df["RBD_score"][i], df["RBD_ex_sum"][i], df["RBD_ex_score"][i] = rbd_sum, rbd_score, rbdx_sum, rbdx_score
-        for k in range(len(rbm_map)):
-            rbm_m=wuhan_m[107:176]
-            rbmx_m=wuhan_expm[107:176]
-            bind_rbm=rbm_m[k,rbm_map[k]]
-            rbm_score.append(bind_rbm)
-            ex_rbm=rbmx_m[k,rbm_map[k]]
-            rbmx_score.append(ex_rbm)      
-        rbm_sum=sum(rbm_score)
-        rbmx_sum=sum(rbmx_score)
-        df["RBM_score_sum"][i], df["RBM_score"][i],df["RBM_ex_sum"][i],df["RBM_ex_score"][i] = rbm_sum, rbm_score, rbmx_sum, rbmx_score
+        if "X" in str(df["RBD_seq"][i]) or "X" in str(df["RBM_seq"][i]):
+            print(df["file_name"][i],":There is ambiguous codons like “TAN” or “NNN” ")
+            pass
+        else:
+            rbd_seq=list(df["RBD_seq"][i])
+            rbm_seq=list(df["RBM_seq"][i])
+            rbd_map=list([*map(col.get, rbd_seq)])
+            rbm_map=list([*map(col.get, rbm_seq)])
+            # build binding score
+            rbd_score=[]
+            rbm_score=[]
+            # build expression score
+            rbdx_score=[]
+            rbmx_score=[]
+            # map scores
+            for j in range(len(rbd_map)):
+                bind_rbd=wuhan_m[j,rbd_map[j]]
+                rbd_score.append(bind_rbd)
+                ex_rbd=wuhan_expm[j,rbd_map[j]]
+                rbdx_score.append(ex_rbd)
+            rbd_sum=sum(rbd_score)
+            rbdx_sum=sum(rbdx_score)
+            df["RBD_score_sum"][i], df["RBD_score"][i], df["RBD_ex_sum"][i], df["RBD_ex_score"][i] = rbd_sum, rbd_score, rbdx_sum, rbdx_score
+            for k in range(len(rbm_map)):
+                rbm_m=wuhan_m[107:176]
+                rbmx_m=wuhan_expm[107:176]
+                bind_rbm=rbm_m[k,rbm_map[k]]
+                rbm_score.append(bind_rbm)
+                ex_rbm=rbmx_m[k,rbm_map[k]]
+                rbmx_score.append(ex_rbm)      
+            rbm_sum=sum(rbm_score)
+            rbmx_sum=sum(rbmx_score)
+            df["RBM_score_sum"][i], df["RBM_score"][i],df["RBM_ex_sum"][i],df["RBM_ex_score"][i] = rbm_sum, rbm_score, rbmx_sum, rbmx_score
     df=df.drop(["index"],axis=1)
     df.to_csv(os.path.join( Output_path,"summary.csv"),index = False)
+    
     
 
     
