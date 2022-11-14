@@ -19,7 +19,7 @@ A surface spike protein regulates the entry of SARS-Cov-2 into host cells.
 ### Running
 
 ```
-python RBD_RBM_matrix -i ./input_folder/ -o ./output_path/ -d ./data_matrix_folder/
+python RBD_RBM_matrix.py -i ./input_folder/ -o ./output_path/ -d ./data_matrix_folder/
 
 # -i, --Input_folder, The path of the folder containing fasta files
 # -o, --Output_path, The path of the output folder
